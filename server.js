@@ -25,8 +25,8 @@ app.get('/', (req, res) => {
   })
 })
 
-let server = app.listen(process.env.port, () => {
-  console.log('Listening on port', process.env.port)
+let server = app.listen(process.env.PORT, () => {
+  console.log('Listening on port', process.env.PORT)
   console.log('Starting chartmogul fetcher')
   getChartMogulInfo()
 })
