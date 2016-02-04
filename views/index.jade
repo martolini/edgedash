@@ -1,0 +1,43 @@
+html
+  head
+    title edgebet dashboard
+    link(href='//maxcdn.bootstrapcdn.com/bootswatch/3.3.6/paper/bootstrap.min.css', rel='stylesheet')
+    link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', rel='stylesheet')
+    link(href='/static/main.css', rel='stylesheet')
+  body
+    .container-fluid
+      .row
+        .col-xs-6
+          h1.text-primary
+            i.fa.fa-hashtag.fa-fw
+            span#nCustomers= nCustomers
+            span &nbsp;customers
+        .col-xs-6
+          h1.text-success
+            i.fa.fa-gbp.fa-fw
+            span#ltv= ltv
+            span &nbsp;LTV
+      .row
+        .col-xs-6
+          h1.text-success
+            i.fa.fa-gbp.fa-fw
+            span#mrr= mrr
+            span &nbsp;MRR
+        .col-xs-6
+          h1.text-danger
+            span#mrrChurnRate= mrrChurnRate
+            span % MRR Churn
+
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    script(type='javascript', src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js')
+    script.
+      $(document).ready(function() {
+        var socket = io(document.location.origin)
+        socket.on('newData', function(data) {
+          for (var key in data) {
+            $('#' + key).html(data[key])
+          }
+          $('#nCustomers').html(data.nCustomers)
+        })
+      })
