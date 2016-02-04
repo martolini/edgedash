@@ -47,8 +47,8 @@ function getChartMogulInfo() {
       } else {
         let entry = response.body.entries[response.body.entries.length - 1]
         nCustomers = entry.customers
-        ltv = parseInt(entry.ltv / 100)
-        mrr = parseInt(entry.mrr / 100)
+        ltv = Math.round(entry.ltv / 100)
+        mrr = Math.round(entry.mrr / 100)
         mrrChurnRate = entry['mrr-churn-rate']
         io.emit('newData', {
           nCustomers,
